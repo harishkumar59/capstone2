@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Video Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Powered by Google GenAI</p>
+          <h1>Create custom videos in seconds</h1>
+          <p class="lede">
+            Describe your scene, set the aspect ratio, and let the AI bring your idea to
+            life. Videos are generated with the Veo 3.1 fast preview model.
+          </p>
+        </div>
+        <div class="hero-card">
+          <form id="video-form">
+            <label for="prompt">Prompt</label>
+            <textarea id="prompt" name="prompt" rows="4" placeholder="Golden retriever running through sunflowers" required></textarea>
+
+            <label for="negative_prompt">Negative prompt</label>
+            <input id="negative_prompt" name="negative_prompt" placeholder="What should the model avoid?" />
+
+            <div class="two-column">
+              <div>
+                <label for="aspect_ratio">Aspect ratio</label>
+                <select id="aspect_ratio" name="aspect_ratio">
+                  <option value="9:16" selected>9:16</option>
+                  <option value="16:9">16:9</option>
+                  <option value="1:1">1:1</option>
+                  <option value="4:3">4:3</option>
+                </select>
+              </div>
+              <div>
+                <label for="resolution">Resolution</label>
+                <select id="resolution" name="resolution">
+                  <option value="720p" selected>720p</option>
+                  <option value="1080p">1080p</option>
+                </select>
+              </div>
+            </div>
+
+            <button type="submit" id="generate-btn">Generate video</button>
+            <p class="status" id="status"></p>
+          </form>
+        </div>
+      </section>
+
+      <section class="output-panel">
+        <div class="panel-header">
+          <h2>Preview</h2>
+          <button type="button" id="download-btn" disabled>Download</button>
+        </div>
+        <div class="video-wrapper">
+          <div class="placeholder" id="placeholder">
+            <p>Generated videos will appear here.</p>
+          </div>
+          <video id="result-video" controls hidden playsinline></video>
+        </div>
+      </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+  </body>
+</html>
+
